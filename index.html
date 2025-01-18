@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Background Remover</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix"></script>
+    <script src="https://cdn.jsdelivr.net/npm/remove.bg.ai@latest/dist/removebg.min.js"></script>
+</head>
+<body class="light-mode">
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Processing your image with AI...</p>
+    </div>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-magic logo-icon"></i>
+                <h1>AI Background Remover</h1>
+            </div>
+            <div class="nav-items">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>AI Background Remover</h1>
+                <p class="hero-subtitle">Remove Image Backgrounds in Seconds with Advanced AI</p>
+                <div class="ai-stats">
+                    <div class="stat">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                        <span>100% Automated</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-bolt"></i>
+                        <span>Instant Results</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Privacy Protected</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://cdn-icons-png.flaticon.com/512/1808/1808389.png" alt="AI Background Removal">
+            </div>
+        </section>
+
+        <section class="upload-section glass-morphism">
+            <div class="upload-container" id="upload-container">
+                <div class="upload-area" id="drop-zone">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>Drag and Drop Your Image Here</h3>
+                    <p>or</p>
+                    <input type="file" id="file-input" accept="image/*" hidden>
+                    <button class="upload-btn">
+                        <i class="fas fa-upload"></i>
+                        Choose Image
+                    </button>
+                    <p class="upload-info">Supported formats: PNG, JPEG, WebP</p>
+                    <div class="upload-progress" id="upload-progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-container" id="preview-container" style="display: none;">
+                <div class="image-preview">
+                    <div class="original-image">
+                        <h3>Original Image</h3>
+                        <div class="image-container">
+                            <img id="original-img" src="" alt="Original">
+                            <div class="image-overlay">
+                                <div class="overlay-content">
+                                    <i class="fas fa-image"></i>
+                                    <span>Original</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="processed-image">
+                        <h3>Processed Image</h3>
+                        <div class="image-container">
+                            <img id="processed-img" src="" alt="Processed">
+                            <div class="image-overlay">
+                                <div class="overlay-content">
+                                    <i class="fas fa-magic"></i>
+                                    <span>AI Processed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="download-btn" id="download-btn">
+                        <i class="fas fa-download"></i> Download HD Image
+                    </button>
+                    <button class="try-again-btn" id="try-again-btn">
+                        <i class="fas fa-redo"></i> Try Another
+                    </button>
+                </div>
+                <div class="image-settings">
+                    <div class="setting">
+                        <label>AI Precision</label>
+                        <select id="ai-precision">
+                            <option value="high">High Quality</option>
+                            <option value="medium">Balanced</option>
+                            <option value="low">Fast</option>
+                        </select>
+                    </div>
+                    <div class="setting">
+                        <label>Output Format</label>
+                        <select id="output-format">
+                            <option value="png">PNG</option>
+                            <option value="jpeg">JPEG</option>
+                            <option value="webp">WebP</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <h2>Premium Features</h2>
+            <div class="feature-cards">
+                <div class="feature-card glass-morphism">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Advanced AI</h3>
+                    <p>State-of-the-art AI technology for precise background removal</p>
+                </div>
+                <div class="feature-card glass-morphism">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Lightning Fast</h3>
+                    <p>Process images in seconds with our optimized AI</p>
+                </div>
+                <div class="feature-card glass-morphism">
+                    <i class="fas fa-lock"></i>
+                    <h3>Secure & Private</h3>
+                    <p>Your images are processed locally and never stored</p>
+                </div>
+                <div class="feature-card glass-morphism">
+                    <i class="fas fa-download"></i>
+                    <h3>HD Downloads</h3>
+                    <p>Download high-quality images in multiple formats</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Upload Image</h3>
+                    <p>Upload any image with a background you want to remove</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Processing</h3>
+                    <p>Our AI precisely detects and removes the background</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Download</h3>
+                    <p>Download your image with the background removed</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Mayank Kumar Singh</p>
+        <p>&copy; 2025 Photo Editor. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
